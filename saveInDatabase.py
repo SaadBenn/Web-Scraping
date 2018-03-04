@@ -34,29 +34,29 @@ def saveInDatabase(json_file):
 		
 # create the database
 
-cur.execute(""" 
-	CREATE TABLE IF NOT EXISTS MOVIEINFO
-	Title TEXT,
-	Year INTEGER,
-	Runtime INTEGER,
-	MetaScore REAL,
-	IMDBRating REAL,
-	Genre TEXT 
-	""")
+	cur.execute(""" 
+		CREATE TABLE IF NOT EXISTS MOVIEINFO
+		Title TEXT,
+		Year INTEGER,
+		Runtime INTEGER,
+		MetaScore REAL,
+		IMDBRating REAL,
+		Genre TEXT 
+		""")
 
-cur.execute('SELECT Title FROM MovieInfo WHERE Title = ?', (title,))
-row = cur.fetchone()
+	cur.execute('SELECT Title FROM MovieInfo WHERE Title = ?', (title,))
+	row = cur.fetchone()
 
-if row is None:
-	cur.execute("""
-		INSERT INTO MovieInfo
-		(Title, Year, Runtime, MetaScore, IMDBRating, Genre)
-		VALUES (?,?,?,?,?,?)""",
-		(title,year, runTime, metaScore, imdbRating, genre))
-else: 
-	print("Database contains the query.")
+	if row is None:
+		cur.execute("""
+			INSERT INTO MovieInfo
+			(Title, Year, Runtime, MetaScore, IMDBRating, Genre)
+			VALUES (?,?,?,?,?,?)""",
+			(title,year, runTime, metaScore, imdbRating, genre))
+	else: 
+		print("Database contains the query.")
 
-# flush the data into the database
-connection.commit()
-#close the connection
-connection.close()					
+	# flush the data into the database
+	connection.commit()
+	#close the connection
+	connection.close()					
